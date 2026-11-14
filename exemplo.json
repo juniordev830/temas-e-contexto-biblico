@@ -1,0 +1,31 @@
+{
+  "tema": "uniao",
+  "passagens": [
+    {
+      "referencia": "Efésios 4:1–6",
+      "temas": [
+        "união",
+        "igreja"
+      ],
+      "funcao": "central",
+      "contexto": "Exortação à unidade no início da parte prática da carta."
+    },
+    {
+      "referencia": "João 17:20–23",
+      "temas": [
+        "união",
+        "oração"
+      ],
+      "funcao": "apoio",
+      "contexto": "Jesus ora por aqueles que viriam a crer."
+    },
+    {
+      "referencia": "Filipenses 4:4–7",
+      "temas": [
+        "oração"
+      ],
+      "funcao": "apoio",
+      "contexto": "Exortações finais da carta."
+    }
+  ]
+}
