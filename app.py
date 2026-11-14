@@ -21,6 +21,10 @@ def chave(value):
 
 
 def run(data):
+    if not isinstance(data, dict):
+        raise ValueError("A entrada deve ser um objeto JSON.")
+    if not isinstance(data["passagens"], list) or any(not isinstance(item, dict) for item in data["passagens"]):
+        raise ValueError("O campo passagens deve ser uma lista de objetos.")
     tema = chave(data["tema"])
     resultado = {"central": [], "apoio": []}
     for item in data["passagens"]:
@@ -59,3 +63,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
