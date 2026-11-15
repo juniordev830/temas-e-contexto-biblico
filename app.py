@@ -30,7 +30,7 @@ def run(data):
     for item in data["passagens"]:
         if tema not in {chave(x) for x in textos(item["temas"])}:
             continue
-        funcao = item["funcao"]
+        funcao = chave(item["funcao"])
         if funcao not in resultado:
             raise ValueError("Classifique a passagem como central ou apoio.")
         resultado[funcao].append({"referencia": texto(item["referencia"]),

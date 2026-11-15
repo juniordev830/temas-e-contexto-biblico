@@ -15,6 +15,15 @@ class ProjetoTest(unittest.TestCase):
         result = run(data)
         self.assertEqual(result['total'], 2)
 
+    def test_classifica_a_funcao_independentemente_de_caixa_e_espacos(self):
+        data = {"tema": "fé", "passagens": [
+            {"temas": ["fé"], "funcao": " CENTRAL ", "referencia": "João 3:16", "contexto": "Diálogo"},
+            {"temas": ["fé"], "funcao": "Apoio", "referencia": "Hebreus 11:1", "contexto": "Introdução"},
+        ]}
+        result = run(data)
+        self.assertEqual(result["central"][0]["referencia"], "João 3:16")
+        self.assertEqual(result["apoio"][0]["referencia"], "Hebreus 11:1")
+
     def test_cli_com_exemplo(self):
         result = subprocess.run(
             [sys.executable, str(ROOT / "app.py"), str(ROOT / "exemplo.json")],
