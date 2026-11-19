@@ -22,3 +22,9 @@ Os exemplos incluem referências bíblicas, perguntas e anotações de demonstra
 ## Exportação para planilha
 
 Use `python app.py exemplo.json --csv > relatorio.csv` para exportar as passagens centrais e de apoio. O CSV usa ponto e vírgula, conserva a ordem do relatório e inclui o cabeçalho mesmo quando a seleção está vazia. O JSON continua sendo a saída padrão.
+
+Também é possível encadear a ferramenta com outro comando usando `-` como entrada. Exemplo em um terminal Bash:
+
+```bash
+cat exemplo.json | python app.py -
+```
