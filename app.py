@@ -60,6 +60,9 @@ def rejeitar_constante_json(constante):
     raise ValueError(f"Constante numérica inválida em JSON: {constante}.")
 
 
+MAX_JSON_BYTES = 1_000_000
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("entrada", help="Arquivo JSON com os dados ou - para a entrada padrão")
@@ -67,10 +70,13 @@ def main():
     args = parser.parse_args()
 
     try:
-        entrada = nullcontext(sys.stdin.buffer) if args.entrada == "-" else Path(args.entrada).open(encoding="utf-8-sig")
+        entrada = nullcontext(sys.stdin.buffer) if args.entrada == "-" else Path(args.entrada).open("rb")
         with entrada as source:
-            data = json.load(
-                source,
+            raw = source.read(MAX_JSON_BYTES + 1)
+        if len(raw) > MAX_JSON_BYTES:
+            raise ValueError("JSON excede o limite de 1 MB.")
+        data = json.loads(
+            raw.decode("utf-8-sig"),
                 object_pairs_hook=objeto_sem_campos_repetidos,
                 parse_constant=rejeitar_constante_json,
             )
@@ -79,7 +85,7 @@ def main():
         result = run(data)
     except RecursionError:
         parser.exit(2, "O JSON tem níveis de aninhamento demais.\n")
-    except (KeyError, TypeError, ValueError, OSError) as exc:
+    except (KeyError, TypeError, ValueError, UnicodeError, OSError) as exc:
         parser.exit(2, f"Erro nos dados ou na execução: {exc}\n")
 
     sys.stdout.reconfigure(encoding="utf-8", newline="\n")
