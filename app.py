@@ -26,9 +26,11 @@ def run(data):
     if not isinstance(data["passagens"], list) or any(not isinstance(item, dict) for item in data["passagens"]):
         raise ValueError("O campo passagens deve ser uma lista de objetos.")
     tema = chave(data["tema"])
+    adicionais = {chave(t) for t in textos(data.get("temas_adicionais", []))}
+    exigidos = adicionais | {tema}
     resultado = {"central": [], "apoio": []}
     for item in data["passagens"]:
-        if tema not in {chave(x) for x in textos(item["temas"])}:
+        if not exigidos.issubset({chave(x) for x in textos(item["temas"])}):
             continue
         funcao = chave(item["funcao"])
         if funcao not in resultado:
