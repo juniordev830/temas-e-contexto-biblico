@@ -3,7 +3,10 @@ import csv
 
 def celula(valor):
     """Mantém texto com aparência de fórmula como texto em planilhas."""
-    if isinstance(valor, str) and valor.lstrip().startswith(("=", "+", "-", "@")):
+    if not isinstance(valor, str):
+        return valor
+    prefixos = ("=", "+", "-", "@", "＝", "＋", "－", "＠")
+    if valor.lstrip().startswith(prefixos) or valor.startswith(("\t", "\r", "\n")):
         return "'" + valor
     return valor
 

@@ -17,6 +17,16 @@ class ExportacaoCliTest(unittest.TestCase):
         self.assertTrue(all(len(linha) == len(linhas[0]) for linha in linhas))
         self.assertIn('Efésios 4:1–6', [celula for linha in linhas[1:] for celula in linha])
 
+    def test_prefixos_de_planilha_preservam_o_texto_original(self):
+        from relatorio_csv import celula
+
+        for prefixo in ("＝", "＋", "－", "＠", "\t", "\r", "\n"):
+            with self.subTest(prefixo=prefixo):
+                texto = prefixo + "Referência"
+                self.assertEqual(celula(texto), "'" + texto)
+        self.assertEqual(celula("  ＝Referência"), "'  ＝Referência")
+        self.assertEqual(celula("João － registro"), "João － registro")
+
     def test_celulas_com_formulas_e_numeros_negativos(self):
         from relatorio_csv import celula
 
