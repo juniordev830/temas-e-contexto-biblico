@@ -1,5 +1,7 @@
 # Temas e contexto bíblico
 
+**Navegação** · [Rodar](#rodar) · [Uso](#uso) · [Fontes e exemplos](#fontes-e-exemplos) · [Código e estudo](docs/ENGENHARIA_REVERSA.md)
+
 Filtre referências temáticas e veja o peso das passagens centrais e de apoio.
 
 ## Rodar
@@ -28,3 +30,9 @@ Também é possível encadear a ferramenta com outro comando usando `-` como ent
 ```bash
 cat exemplo.json | python app.py -
 ```
+
+## Código e roteiro de estudo
+
+Como testar que uma referência de apoio contribui para o tema sem substituir a passagem central? O [guia de engenharia reversa](docs/ENGENHARIA_REVERSA.md) reúne o mapa dos módulos e uma pergunta técnica baseada no projeto.
+
+Mantido por [João Junior](https://github.com/juniordev830).
